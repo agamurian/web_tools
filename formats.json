@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "https://github.com/FFmpeg/FFmpeg/blob/n7.1/doc/muxers.texi",
+    "https://github.com/FFmpeg/FFmpeg/blob/n7.1/doc/encoders.texi"
+  ],
+  "notes": [
+    "Curated export profiles, not an exhaustive FFmpeg format list.",
+    "Input support depends on the installed FFmpeg decoders and demuxers.",
+    "Image outputs take the first video frame. GIF uses 12 fps.",
+    "PNG, BMP and TIFF are lossless; quality presets do not affect them.",
+    "JPEG and H.264 do not preserve transparency. HDR color management is not implemented."
+  ],
+  "max_upload_bytes": 536870912,
+  "qualities": [
+    "small",
+    "balanced",
+    "high"
+  ],
+  "widths": [
+    0,
+    640,
+    1280,
+    1920,
+    3840
+  ],
+  "formats": [
+    {
+      "id": "mp4",
+      "label": "MP4 \u00b7 H.264",
+      "kind": "video",
+      "extension": "mp4",
+      "mime": "video/mp4",
+      "encoders": [
+        "libx264",
+        "aac"
+      ],
+      "args": [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart"
+      ],
+      "quality_args": {
+        "small": [
+          "-crf",
+          "28"
+        ],
+        "balanced": [
+          "-crf",
+          "23"
+        ],
+        "high": [
+          "-crf",
+          "18"
+        ]
+      }
+    },
+    {
+      "id": "mov",
+      "label": "MOV \u00b7 H.264",
+      "kind": "video",
+      "extension": "mov",
+      "mime": "video/quicktime",
+      "encoders": [
+        "libx264",
+        "aac"
+      ],
+      "args": [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart"
+      ],
+      "quality_args": {
+        "small": [
+          "-crf",
+          "28"
+        ],
+        "balanced": [
+          "-crf",
+          "23"
+        ],
+        "high": [
+          "-crf",
+          "18"
+        ]
+      }
+    },
+    {
+      "id": "mkv",
+      "label": "MKV \u00b7 H.264",
+      "kind": "video",
+      "extension": "mkv",
+      "mime": "video/x-matroska",
+      "encoders": [
+        "libx264",
+        "aac"
+      ],
+      "args": [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k"
+      ],
+      "quality_args": {
+        "small": [
+          "-crf",
+          "28"
+        ],
+        "balanced": [
+          "-crf",
+          "23"
+        ],
+        "high": [
+          "-crf",
+          "18"
+        ]
+      }
+    },
+    {
+      "id": "webm",
+      "label": "WebM \u00b7 VP9",
+      "kind": "video",
+      "extension": "webm",
+      "mime": "video/webm",
+      "encoders": [
+        "libvpx-vp9",
+        "libopus"
+      ],
+      "args": [
+        "-c:v",
+        "libvpx-vp9",
+        "-b:v",
+        "0",
+        "-deadline",
+        "realtime",
+        "-cpu-used",
+        "6",
+        "-c:a",
+        "libopus"
+      ],
+      "quality_args": {
+        "small": [
+          "-crf",
+          "40"
+        ],
+        "balanced": [
+          "-crf",
+          "32"
+        ],
+        "high": [
+          "-crf",
+          "24"
+        ]
+      }
+    },
+    {
+      "id": "gif",
+      "label": "Animated GIF",
+      "kind": "video",
+      "extension": "gif",
+      "mime": "image/gif",
+      "encoders": [
+        "gif"
+      ],
+      "args": [
+        "-c:v",
+        "gif",
+        "-loop",
+        "0"
+      ],
+      "quality_args": {
+        "small": [],
+        "balanced": [],
+        "high": []
+      }
+    },
+    {
+      "id": "jpeg",
+      "label": "JPEG",
+      "kind": "image",
+      "extension": "jpg",
+      "mime": "image/jpeg",
+      "encoders": [
+        "mjpeg"
+      ],
+      "args": [
+        "-frames:v",
+        "1",
+        "-c:v",
+        "mjpeg",
+        "-pix_fmt",
+        "yuvj420p"
+      ],
+      "quality_args": {
+        "small": [
+          "-q:v",
+          "8"
+        ],
+        "balanced": [
+          "-q:v",
+          "4"
+        ],
+        "high": [
+          "-q:v",
+          "2"
+        ]
+      }
+    },
+    {
+      "id": "png",
+      "label": "PNG",
+      "kind": "image",
+      "extension": "png",
+      "mime": "image/png",
+      "encoders": [
+        "png"
+      ],
+      "args": [
+        "-frames:v",
+        "1",
+        "-c:v",
+        "png"
+      ],
+      "quality_args": {
+        "small": [],
+        "balanced": [],
+        "high": []
+      }
+    },
+    {
+      "id": "webp",
+      "label": "WebP",
+      "kind": "image",
+      "extension": "webp",
+      "mime": "image/webp",
+      "encoders": [
+        "libwebp"
+      ],
+      "args": [
+        "-frames:v",
+        "1",
+        "-c:v",
+        "libwebp"
+      ],
+      "quality_args": {
+        "small": [
+          "-quality",
+          "60"
+        ],
+        "balanced": [
+          "-quality",
+          "80"
+        ],
+        "high": [
+          "-quality",
+          "95"
+        ]
+      }
+    },
+    {
+      "id": "bmp",
+      "label": "BMP",
+      "kind": "image",
+      "extension": "bmp",
+      "mime": "image/bmp",
+      "encoders": [
+        "bmp"
+      ],
+      "args": [
+        "-frames:v",
+        "1",
+        "-c:v",
+        "bmp"
+      ],
+      "quality_args": {
+        "small": [],
+        "balanced": [],
+        "high": []
+      }
+    },
+    {
+      "id": "tiff",
+      "label": "TIFF",
+      "kind": "image",
+      "extension": "tiff",
+      "mime": "image/tiff",
+      "encoders": [
+        "tiff"
+      ],
+      "args": [
+        "-frames:v",
+        "1",
+        "-c:v",
+        "tiff"
+      ],
+      "quality_args": {
+        "small": [],
+        "balanced": [],
+        "high": []
+      }
+    }
+  ]
+}
